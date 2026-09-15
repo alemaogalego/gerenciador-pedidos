@@ -14,6 +14,8 @@ public class Produto {
     @Column(name = "valor")
     private Double preco;
 
+    protected Produto() {
+    }
 
     public Produto(Long id, String nome, Double preco) {
         this.id = id;
