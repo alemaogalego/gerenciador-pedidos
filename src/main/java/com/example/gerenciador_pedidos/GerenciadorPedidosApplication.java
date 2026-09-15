@@ -31,13 +31,14 @@ public class GerenciadorPedidosApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Produto produto = new Produto(null, "Notebook", 3500.00);
+		Categoria categoria = new Categoria(null, "Eletrônicos");
+		Categoria categoriaSalva = categoriaRepository.save(categoria);
+
+		Produto produto = new Produto(null, "Smartphone", 1500.0, categoriaSalva);
 		produtoRepository.save(produto);
 
-		Pedido pedidos = new Pedido(null, LocalDate.now());
-		pedidoRepository.save(pedidos);
+		Pedido pedido = new Pedido(null, LocalDate.now());
+		pedidoRepository.save(pedido);
 
-		Categoria categoria = new Categoria(null, "Eletrônicos");
-		categoriaRepository.save(categoria);
 	}
 }
