@@ -6,9 +6,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 @Entity
 public class Pedido {
     @Id
@@ -18,19 +25,5 @@ public class Pedido {
     @NotNull
     private LocalDate data;
 
-    protected Pedido() {
-    }
 
-    public Pedido(Long id, LocalDate data) {
-        this.id = id;
-        this.data = data;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public LocalDate getData() {
-        return data;
-    }
 }

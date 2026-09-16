@@ -51,4 +51,5 @@ public class Produto {
     public Categoria getCategoria() {
         return categoria;
     }
+
 }

@@ -18,4 +18,5 @@ public class CategoriaService {
         return categoriaRepository.findByNome(nome)
                 .orElseGet(() -> categoriaRepository.save(new Categoria(null, nome)));
     }
+
 }
