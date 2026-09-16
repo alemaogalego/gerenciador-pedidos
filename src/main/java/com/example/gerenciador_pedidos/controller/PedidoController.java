@@ -1,6 +1,7 @@
 package com.example.gerenciador_pedidos.controller;
 
 import com.example.gerenciador_pedidos.dto.CriarPedidoRequest;
+import com.example.gerenciador_pedidos.dto.ItemPedidoResponse;
 import com.example.gerenciador_pedidos.model.ItemPedido;
 import com.example.gerenciador_pedidos.service.PedidoService;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ public class PedidoController {
     }
 
     @PostMapping
-    public ResponseEntity<ItemPedido> criar(@RequestBody CriarPedidoRequest request) {
+    public ResponseEntity<ItemPedidoResponse> criar(@RequestBody CriarPedidoRequest request) {
         ItemPedido itemPedido = pedidoService.criarPedidoComItem(
                 request.nomeCategoria(),
                 request.nomeProduto(),
@@ -29,15 +30,22 @@ public class PedidoController {
                 request.valorUnitario()
         );
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(itemPedido);
+        return ResponseEntity.status(HttpStatus.CREATED).body(ItemPedidoResponse.fromEntity(itemPedido));
     }
+
+
     @GetMapping
-    public ResponseEntity<List<ItemPedido>> listar() {
-        return ResponseEntity.ok(pedidoService.listarItens());
+    public ResponseEntity<List<ItemPedidoResponse>> listar() {
+        List<ItemPedidoResponse> resposta = pedidoService.listarItens().stream()
+                .map(ItemPedidoResponse::fromEntity)
+                .toList();
+        return ResponseEntity.ok(resposta);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ItemPedido> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(pedidoService.buscarItemPorId(id));
+    public ResponseEntity<ItemPedidoResponse> buscarPorId(@PathVariable Long id) {
+        ItemPedido item = pedidoService.buscarItemPorId(id);
+        return ResponseEntity.ok(ItemPedidoResponse.fromEntity(item));
     }
+
 }
