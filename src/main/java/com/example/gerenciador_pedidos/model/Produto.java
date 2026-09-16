@@ -2,6 +2,9 @@ package com.example.gerenciador_pedidos.model;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 
 @Entity
@@ -10,8 +13,13 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank
     @Column(unique = true, nullable = false)
     private String nome;
+
+    @NotNull
+    @Positive
     @Column(name = "valor")
     private Double preco;
 
