@@ -15,4 +15,10 @@ public class GlobalExceptionHandler {
         ErroResponse erro = new ErroResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST.value(), ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
     }
+
+    @ExceptionHandler(ItemPedidoNaoEncontradoException.class)
+    public ResponseEntity<ErroResponse> tratarNaoEncontrado(ItemPedidoNaoEncontradoException ex) {
+        ErroResponse erro = new ErroResponse(LocalDateTime.now(), HttpStatus.NOT_FOUND.value(), ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+    }
 }

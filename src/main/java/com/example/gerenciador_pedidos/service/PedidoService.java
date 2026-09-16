@@ -1,5 +1,6 @@
 package com.example.gerenciador_pedidos.service;
 
+import com.example.gerenciador_pedidos.exception.ItemPedidoNaoEncontradoException;
 import com.example.gerenciador_pedidos.model.Categoria;
 import com.example.gerenciador_pedidos.model.ItemPedido;
 import com.example.gerenciador_pedidos.model.Pedido;
@@ -11,6 +12,7 @@ import com.example.gerenciador_pedidos.repository.ProdutoRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class PedidoService {
@@ -18,6 +20,15 @@ public class PedidoService {
     private final ProdutoService produtoService;
     private final PedidoRepository pedidoRepository;
     private final ItemPedidoRepository itemPedidoRepository;
+
+    public List<ItemPedido> listarItens(){
+        return itemPedidoRepository.findAll();
+    }
+
+    public ItemPedido buscarItemPorId(Long id) {
+        return itemPedidoRepository.findById(id)
+                .orElseThrow(() -> new ItemPedidoNaoEncontradoException("Item de pedido não encontrado com id: " + id));
+    }
 
     public PedidoService(CategoriaService categoriaService, ProdutoService produtoService, PedidoRepository pedidoRepository, ItemPedidoRepository itemPedidoRepository) {
         this.categoriaService = categoriaService;
@@ -33,6 +44,8 @@ public class PedidoService {
         ItemPedido itemPedido = new ItemPedido(null, pedido, produto, quantidade, valorUnitario);
         return itemPedidoRepository.save(itemPedido);
     }
+
+
 
 
 }

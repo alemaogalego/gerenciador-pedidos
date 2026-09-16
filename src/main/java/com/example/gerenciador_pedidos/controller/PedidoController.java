@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/pedidos")
 public class PedidoController {
@@ -28,5 +30,14 @@ public class PedidoController {
         );
 
         return ResponseEntity.status(HttpStatus.CREATED).body(itemPedido);
+    }
+    @GetMapping
+    public ResponseEntity<List<ItemPedido>> listar() {
+        return ResponseEntity.ok(pedidoService.listarItens());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ItemPedido> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(pedidoService.buscarItemPorId(id));
     }
 }
