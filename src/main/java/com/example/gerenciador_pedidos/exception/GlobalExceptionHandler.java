@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler({PrecoDivergenteException.class, CategoriaDivergenteException.class})
+    @ExceptionHandler({PrecoDivergenteException.class, CategoriaDivergenteException.class, FornecedorDivergenteException.class})
     public ResponseEntity<ErroResponse> tratarDivergencia(RuntimeException ex) {
         ErroResponse erro = new ErroResponse(LocalDateTime.now(), HttpStatus.BAD_REQUEST.value(), ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);

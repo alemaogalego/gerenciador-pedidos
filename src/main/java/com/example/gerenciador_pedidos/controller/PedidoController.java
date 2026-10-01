@@ -24,6 +24,7 @@ public class PedidoController {
     public ResponseEntity<ItemPedidoResponse> criar(@RequestBody CriarPedidoRequest request) {
         ItemPedido itemPedido = pedidoService.criarPedidoComItem(
                 request.nomeCategoria(),
+                request.nomeFornecedor(),
                 request.nomeProduto(),
                 request.precoProduto(),
                 request.quantidade(),

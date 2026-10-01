@@ -37,7 +37,7 @@ class PedidoControllerTest {
         Pedido pedido = new Pedido(9L, LocalDate.now());
         ItemPedido itemPedido = new ItemPedido(9L, pedido, produto, 1, 1000.0);
 
-        when(pedidoService.criarPedidoComItem(any(), any(), any(), any(), any()))
+        when(pedidoService.criarPedidoComItem(any(), any(), any(), any(), any(), any()))
                 .thenReturn(itemPedido);
 
         String jsonRequisicao = """
@@ -60,7 +60,7 @@ class PedidoControllerTest {
 
     @Test
     void deveRetornar400QuandoPrecoDivergente() throws Exception {
-        when(pedidoService.criarPedidoComItem(any(), any(), any(), any(), any()))
+        when(pedidoService.criarPedidoComItem(any(), any(), any(), any(), any(), any()))
                 .thenThrow(new PrecoDivergenteException("Preço divergente"));
 
         String jsonRequisicao = """

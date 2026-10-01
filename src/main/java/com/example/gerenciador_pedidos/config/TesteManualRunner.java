@@ -18,7 +18,8 @@ public class    TesteManualRunner implements CommandLineRunner {
     @Override
     public void run(String... args) {
         try {
-            pedidoService.criarPedidoComItem("FOOD", "Smartphone", 1000.0, 1, 1000.0);
+            pedidoService.criarPedidoComItem("Eletronico", "Samsung", "Smartphone", 1000.0, 1, 1000.0);
+            pedidoService.criarPedidoComItem("Eletronico", "Apple", "iPhone 16", 5000.0, 10, 5000.0);
         } catch (PrecoDivergenteException | CategoriaDivergenteException e) {
             System.out.println("Erro ao criar pedidos: " + e.getMessage());
         }
