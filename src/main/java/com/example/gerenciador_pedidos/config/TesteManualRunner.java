@@ -7,7 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TesteManualRunner implements CommandLineRunner {
+public class    TesteManualRunner implements CommandLineRunner {
 
     private final PedidoService pedidoService;
 

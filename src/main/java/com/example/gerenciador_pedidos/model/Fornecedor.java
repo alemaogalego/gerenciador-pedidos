@@ -3,17 +3,15 @@ package com.example.gerenciador_pedidos.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
-import java.util.List;
-
 
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Categoria {
+@AllArgsConstructor
+public class Fornecedor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,11 +19,4 @@ public class Categoria {
     @NotBlank
     private String nome;
 
-    @OneToMany(mappedBy = "categoria", cascade = CascadeType.PERSIST)
-    private List<Produto> produtos = new ArrayList<>();
-
-    public Categoria(Long id, String nome) {
-        this.id = id;
-        this.nome = nome;
-    }
 }

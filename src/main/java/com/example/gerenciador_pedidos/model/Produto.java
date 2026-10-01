@@ -27,6 +27,10 @@ public class Produto {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
+    @ManyToOne
+    @JoinColumn(name = "fornecedor_id")
+    private Fornecedor fornecedor;
+
     protected Produto() {
     }
 
@@ -34,6 +38,13 @@ public class Produto {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
+        this.categoria = categoria;
+    }
+    public Produto(Long id, String nome, Double preco, Fornecedor fornecedor, Categoria categoria) {
+        this.id = id;
+        this.nome = nome;
+        this.preco = preco;
+        this.fornecedor = fornecedor;
         this.categoria = categoria;
     }
     public Long getId() {
@@ -52,4 +63,7 @@ public class Produto {
         return categoria;
     }
 
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
 }
